@@ -1,19 +1,35 @@
-# Program #3: Average Numbers
-# Assume a file containing a series of integers is named numbers.txt and exists on the computer's disk.
-# (please use the provided numbers.txt)
-# Write a program that reads all of the numbers stored in the file and calculates their total.  
+#Logan H's Average Numbers Program
+#
+# 1st: Define function to read numbers and calculate total
+def calculate_total():
+    """
+    Reads integers from 'numbers.txt', calculates their total,
+    and handles potential IOError and ValueError exceptions.
+    """
+    try:
+        # 2nd: Open the file for reading
+        with open("numbers.txt", "r") as file:
+            total = 0  # Initialize total sum
+            count = 0  # Track number of numbers
 
-# The program should handle the following exceptions: 
+            # 3rd: Read and process each line
+            for line in file:
+                try:
+                    num = int(line.strip())  # Convert line to integer
+                    total += num
+                    count += 1
+                except ValueError:
+                    print(f"Warning: Skipping invalid data '{line.strip()}' (not an integer).")
 
-# It should handle any IOError exceptions that are raised.
-# It should handle any ValueError exceptions that are raised when the items that are read from the file 
-# are converted to a number.
-def sum_numbers_from_file():
-    ######################
-    # Add your code here #
-    ######################
-    print('In the sum_numbers_from_file function')
+        # 4th: Display total if numbers were processed
+        if count > 0:
+            print(f"Total of all numbers: {total}")
+        else:
+            print("No valid numbers found in the file.")
 
-# You don't need to change anything below this line:
-if __name__ == '__main__':
-    sum_numbers_from_file()
+    except IOError:
+        print("Error: Could not read the file 'numbers.txt'. Ensure the file exists and is accessible.")
+
+
+# 5th: Run the function
+calculate_total()
